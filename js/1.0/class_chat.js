@@ -1,6 +1,6 @@
 
 
-import Notification from "./notification"
+import Notification from "./notification.js"
 
 
 export default class ClassChat extends Notification{
