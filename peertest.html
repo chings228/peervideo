@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <title>Document</title>
+
+
+    <script>
+
+var peer , connectpeer , selfpeer , connection , isConnected
+
+$(function(){
+
+    console.log("jq")
+
+    init()
+    addevent()
+})
+
+
+function addevent(){
+
+    $("#enter").click(()=>{
+
+
+        const message = $("#message").val().trim()
+
+        console.log(message)
+        connection.send(message)
+
+    })
+
+
+}
+
+
+        function init(){
+
+            isConnected = false;
+
+            const option = {}
+
+ 
+                option.host = 'video.1328.hk';
+                option.port = 3030;
+                option.path = '/';
+
+
+                let isHost = false
+
+
+                if (window.location.search.includes('host')){
+
+                    isHost = true
+                }
+
+
+                let link = `${window.location.origin}${window.location.pathname}`
+
+                if (!isHost){
+
+                    link = `${link}?host`
+                }
+
+                console.log(link)
+
+                $("#opplink").html(`<a href=${link} target=_blank>${link}</a>`)
+
+
+                console.log(isHost)
+
+                selfpeer = 'host'
+                connectpeer = 'guest'
+
+                if (!isHost){
+
+                    selfpeer = 'guest'
+                    connectpeer = 'host'
+                }
+
+
+
+                console.log(`selfpeer ${selfpeer} , connectpeer ${connectpeer}`)
+
+                peer = new Peer(selfpeer,option)
+
+                console.log(peer)
+
+
+                peer.on('open',()=>{
+
+                        console.log("peer open")
+
+                
+
+                        connectfd()
+                
+                })
+            
+        }
+
+
+
+
+
+ 
+   
+       function connectfd(){            
+
+
+                console.log("connect ",connectpeer)
+                connection = peer.connect(connectpeer);
+
+                    console.log(connection)
+            // on open will be launch when you successfully connect to PeerServer
+            connection.on('open', ()=>{
+
+                console.log('connection open')
+
+
+                isConnected = false
+
+ 
+                });
+
+
+
+            connection.on('error',e=>{
+
+                console.log(e.type)
+            })
+
+                peer.on('connection', conn=> {
+
+                    // connection = peer.connect(connectpeer);
+
+                        if (!isConnected){
+
+                            isConnected = true;
+                            console.log("after per connection connt ",connectpeer)
+
+                            connection = peer.connect(connectpeer)
+                            
+                        }
+         
+
+                        console.log("peer connection")
+
+
+                            // peer.connect(connectpeer)
+
+
+                            conn.on('data', function(data){
+                                // Will print 'hi!'
+                                console.log(data);
+
+                                const msg = `<div>${data}</div>`
+
+                                $("#msglist").append(msg)
+                            });
+                    });
+
+        }
+
+
+    </script>
+
+
+</head>
+<body>
+
+
+    <div id="opplink"></div>
+
+    <br>
+
+    <input type="text" id="message">
+
+    <button id="enter">Enter</button>
+
+    <div id="msglist"></div>
+
+
+</body>
+</html>

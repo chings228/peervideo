@@ -1,0 +1,138 @@
+
+*{
+    box-sizing: border-box;
+}
+
+
+
+video{
+
+    /* background-color : violet; */
+    object-fit: cover;
+}
+
+
+
+#hostvideo{
+
+    position:absolute;
+    z-index : 9999;
+    top: 20px;
+    left : 20px;
+    width : 40vw;
+    height : 30vw;
+    max-width : 300px;
+    max-height : 200px;
+
+
+
+}
+
+*{
+    margin: 0px;
+}
+
+
+
+#guestvideo{
+
+    width : 100dvw;
+    height :100dvh;
+
+}
+
+
+
+#guestlink{
+    position :absolute;
+    right : 10px;
+    top:10px;
+        z-index: 999;
+    height: 20px;
+    width: 300px;
+    font-size: small;
+    display:none;
+    padding : 20px;
+
+}
+
+
+
+
+.chat_guest{
+    float : left;
+}
+
+.chat_host{
+    float : right;
+    text-align: right;
+}
+
+.chat_dialogue{
+    width : 70%;
+    margin : 5px 8px;
+
+}
+
+
+.chat{
+
+    background-color: white;
+
+    position: absolute;
+
+    bottom : 10px;
+    right : 10px;
+
+    width : 40vw;
+    height : 40vh;
+    padding : 3px;
+    max-width : 300px;
+    min-width : 200px;
+
+}
+
+#chat_content{
+
+    /* background-color: yellow; */
+    height : 90%;
+    /* display : flex; */
+    justify-content: flex-end;
+    flex-direction: column;
+    overflow: scroll;
+    border : solid 0.5px;
+}
+
+
+.chat_input{
+    display:flex;
+    justify-content: space-between;
+}
+
+#chatinput{
+    width : 100%;
+    padding : 3px;
+}
+
+button{
+    -webkit-appearance: none;
+}
+
+
+
+.buttons{
+
+    position:absolute;
+    left : 10px;
+    bottom : 10px;
+    padding : 10px;
+    display : flex;
+    flex-direction: column;
+
+}
+
+.buttons *{
+    margin : 3px;
+    padding : 2px;
+    height : 40px;
+}
