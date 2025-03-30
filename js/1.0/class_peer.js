@@ -1,10 +1,10 @@
 
-import turnserver from "./turnserver"
+import turnserver from "./turnserver.js"
 import {Peer} from "https://esm.sh/peerjs@1.5.4?bundle-deps"
 
-import Notification from "./notification"
-import ClassChat from "./class_chat"
-import ClassVideo from "./class_video"
+import Notification from "./notification.js"
+import ClassChat from "./class_chat.js"
+import ClassVideo from "./class_video.js"
 
 export default class PeerConnect extends Notification{
 
