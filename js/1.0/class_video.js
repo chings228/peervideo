@@ -102,6 +102,7 @@ export default class ClassVideo extends Notification{
 		video.addEventListener('loadedmetadata', () => {
 			console.log('start play');
             video.play();
+
             
 		});
 	}
@@ -126,12 +127,30 @@ export default class ClassVideo extends Notification{
 
         //if (!global.isHost){
 
+        const multiplier = 1;
+
+        const width = 600 * multiplier;
+        const height = 400 * multiplier
+
+        console.log(multiplier)
+
+
+
+
+
         if (this.streamtype == 'camera'){  
 
             return new Promise((resolve, reject) => {
+
+                if (navigator.mediaDevices.getSupportedConstraints().zoom){
+                    console.log("suppot zoom")
+                }
+                else{
+                    console.log("not support zoom")
+                }
                 navigator.mediaDevices
                     .getUserMedia({
-                        video : { width: 800, height: 600 },
+                        video : { width: width, height: height },
                         audio : true
                     })
                     .then((stream) => {

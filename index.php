@@ -29,15 +29,17 @@
 
 <div class=chat>
 
-<div id=chat_content>
+    <div id=chathide>Hide Message</div>
+
+    <div id=chat_content>
 
 
-</div>
+    </div>
 
-<div class=chat_input>
+    <div class=chat_input>
 
-<textarea id=chatinput></textarea><button id=enter>Enter</button>
-</div>
+    <textarea id=chatinput></textarea><button id=enter>Enter</button>
+    </div>
 
 
 </div>

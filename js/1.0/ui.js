@@ -66,7 +66,7 @@ export default class UI{
 
             const html = `<div class='chat_dialogue chat_guest'>${Common.he(e)}</div>`
 
-            $("#chat_content").append(html)
+            $("#chat_content").append(html.replaceAll('\n','<br>'))
 
             this.scrollToBottom()
 
@@ -83,12 +83,40 @@ export default class UI{
             
         })
 
-        document.onkeypress = e=> {
-                const key = e.keyCode || e.which
 
-                if (key == 13){
+        $("#chathide").click(()=>{
+
+            this.hidechat = !this.hidechat
+
+            let  display = 'none'
+            let display_f = 'none'
+            let  title = 'Show Message'
+
+            if (!this.hidechat){
+
+                display = 'block'
+                title = 'Hide Message'
+                display_f = 'flex'
+
+            }
+
+
+             $(".chat_input").css("display",display_f)
+             $("#chat_content").css("display",display)
+
+             $("#chathide").text(title)
+
+
+
+        })
+
+
+        document.onkeypress = evt => {
+
+                if (evt.keyCode == 13 && !evt.shiftKey) {
                     this.sendtext()
                 }
+
         };
 
 
@@ -105,7 +133,7 @@ export default class UI{
 
                 const html = `<div class='chat_dialogue chat_host'>${Common.he(content)}</div>`
 
-                $("#chat_content").append(html)
+                $("#chat_content").append(html.replaceAll('\n','<br>'))
 
 
                 this.peerConnect.sendMsg(content)
