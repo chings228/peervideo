@@ -70,6 +70,8 @@ export default class UI{
 
             this.scrollToBottom()
 
+            this.switchChatWindow(false)
+
         })
 
 
@@ -84,28 +86,17 @@ export default class UI{
         })
 
 
+
+
+
+
+
+
         $("#chathide").click(()=>{
 
-            this.hidechat = !this.hidechat
+            this.isHideChat = !this.isHideChat
 
-            let  display = 'none'
-            let display_f = 'none'
-            let  title = 'Show Message'
-
-            if (!this.hidechat){
-
-                display = 'block'
-                title = 'Hide Message'
-                display_f = 'flex'
-
-            }
-
-
-             $(".chat_input").css("display",display_f)
-             $("#chat_content").css("display",display)
-
-             $("#chathide").text(title)
-
+            this.switchChatWindow(this.isHideChat)
 
 
         })
@@ -121,6 +112,35 @@ export default class UI{
 
 
     }   
+
+
+
+
+
+    switchChatWindow(isHide){
+
+        
+
+        let  display = 'none'
+        let display_f = 'none'
+        let  title = 'Show Message'
+
+        if (!isHide){
+
+            display = 'block'
+            title = 'Hide Message'
+            display_f = 'flex'
+
+        }
+
+
+         $(".chat_input").css("display",display_f)
+         $("#chat_content").css("display",display)
+
+         $("#chathide").text(title)
+
+
+    }
 
 
         sendtext(){
