@@ -145,7 +145,7 @@ export default class PeerConnect extends Notification{
                 data.type = 'command'
                 data.content = e
 
-                this.peerchat.sendCommand(e)
+                this.peerchat.sendMsg(data)
 
 
 

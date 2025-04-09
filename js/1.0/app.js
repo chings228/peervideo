@@ -18,6 +18,9 @@ $(function(){
    window.Common = Common
    window.global = {}
 
+
+
+
     init()
 
 })
