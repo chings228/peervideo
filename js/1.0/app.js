@@ -68,6 +68,7 @@ function init(){
     param.hostvideoid = 'hostvideo'
     param.guestvideoid = 'guestvideo'
     param.isHost = global.isHost 
+    
 
 
     if (global.hasOwnProperty('peerid')){
@@ -78,7 +79,7 @@ function init(){
 
 
 
-    
+
 
 
     

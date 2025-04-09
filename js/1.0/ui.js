@@ -31,6 +31,9 @@ export default class UI{
 
     init(){
 
+
+
+
         
 
         this.peerConnect = new PeerConnect(this.param,e=>{
@@ -64,9 +67,26 @@ export default class UI{
 
             console.log(e)
 
-            const html = `<div class='chat_dialogue chat_guest'>${Common.he(e)}</div>`
+            if (e.type == 'text'){
+                const html = `<div class='chat_dialogue chat_guest'>${Common.he(e.content)}</div>`
 
-            $("#chat_content").append(html.replaceAll('\n','<br>'))
+                $("#chat_content").append(html.replaceAll('\n','<br>'))
+
+
+            }
+
+            else if (e.type == 'image'){
+
+                const html = `<div class='chat_dialogue chat_guest'><img  class=clickimage src=${e.content} width=80% ></div>`
+
+                $("#chat_content").append(html)
+
+                this.imagelistener()
+
+
+            }
+
+
 
             this.scrollToBottom()
 
@@ -111,6 +131,16 @@ export default class UI{
         };
 
 
+
+        $("#btn_image").click(()=>{
+
+
+            this.sendImage()
+
+
+        })
+
+
     }   
 
 
@@ -136,8 +166,76 @@ export default class UI{
 
          $(".chat_input").css("display",display_f)
          $("#chat_content").css("display",display)
+         $("#btn_image").css("display",display)
 
          $("#chathide").text(title)
+
+
+    }
+
+
+
+    sendImage(){
+
+        var input = document.createElement('input');
+
+        input.type = 'file';
+        input.id = "fileupload"
+        input.accept = "image/png, image/gif, image/jpeg"
+        input.click()
+
+        console.log(input)
+
+        console.log($("#fileupload"))
+
+        input.onchange = e=>{
+
+
+            const reader = new FileReader()
+            console.log(e)
+
+            const file = e.target.files[0]
+
+            console.log(file)
+
+            reader.readAsDataURL(file)
+
+
+            reader.onload = ()=>{
+
+                console.log(reader)
+
+
+
+                const img = new Image()
+
+                img.src = reader.result
+
+                const html = `<div class='chat_dialogue chat_host'><img class=clickimage width=80% src=${reader.result}></div>`
+
+
+                $("#chat_content").append(html)
+
+                this.imagelistener()
+
+
+                const data = {}
+
+                data.type = 'image'
+                data.content = reader.result
+
+                this.peerConnect.sendMsg(data)
+
+
+                this.scrollToBottom()
+
+
+            }
+
+
+
+
+        }
 
 
     }
@@ -156,7 +254,11 @@ export default class UI{
                 $("#chat_content").append(html.replaceAll('\n','<br>'))
 
 
-                this.peerConnect.sendMsg(content)
+                const data = {}
+
+                data.type='text'
+                data.content = content
+                this.peerConnect.sendMsg(data)
 
                 this.scrollToBottom()
 
@@ -193,6 +295,23 @@ export default class UI{
 
     }
 
+
+
+    imagelistener(){
+
+        const clickimage = $(".clickimage")
+
+
+        clickimage.off("click")
+        clickimage.click(e=>{
+
+            console.log("click",e.currentTarget.src)
+            var win = window.open();
+            win.document.write(`<img src=${e.currentTarget.src}>`)
+
+
+        })
+    }
 
 
 

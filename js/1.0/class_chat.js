@@ -74,9 +74,7 @@ export default class ClassChat extends Notification{
 
                 console.log(data)
 
-    
-
-                    this.fire('msgreceive',data)
+                this.fire('msgreceive',data)
    
                 
 
@@ -89,22 +87,13 @@ export default class ClassChat extends Notification{
 
     }
 
-    sendCommand(command){
-
-        let data = {}
-        data.type = 'command'
-        data.content = command
-
-        this.conn.send(data)
-
-    }
 
 
-    sendMsg(content){
+    sendMsg(data){
 
-        let data = {}
-        data.type = 'text'
-        data.content = content
+        // let data = {}
+        // data.type = 'text'
+        // data.content = content
 
         this.conn.send(data)
 

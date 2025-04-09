@@ -32,6 +32,7 @@
 <div class=chat>
 
     <div id=chathide>Hide Message</div>
+    <div id=btn_image>Image</div>
 
     <div id=chat_content>
 

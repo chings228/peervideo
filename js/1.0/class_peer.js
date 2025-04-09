@@ -141,6 +141,10 @@ export default class PeerConnect extends Notification{
 
                 console.log(e)
 
+                const data = {}
+                data.type = 'command'
+                data.content = e
+
                 this.peerchat.sendCommand(e)
 
 
@@ -156,7 +160,7 @@ export default class PeerConnect extends Notification{
 
 
                 
-                if (data.type == 'text'){
+                if (data.type == 'text' || data.type == 'image'){
 
                     this.fire('incomingtext',data.content)
                 }
@@ -173,7 +177,7 @@ export default class PeerConnect extends Notification{
 
                 }
 
-                //this.fire('incomingtext',data)
+                this.fire('incomingtext',data)
             })
 
      
@@ -184,10 +188,10 @@ export default class PeerConnect extends Notification{
 
 
         
-    sendMsg(content){
+    sendMsg(data){
 
-        console.log(content)
-        this.peerchat.sendMsg(content)
+
+        this.peerchat.sendMsg(data)
 
 
     }
