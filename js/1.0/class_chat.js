@@ -10,7 +10,7 @@ export default class ClassChat extends Notification{
     conn
     isConnected
 
-    constructor(param){
+    constructor(peer,param){
         super()
 
         console.log('chat')
@@ -19,8 +19,8 @@ export default class ClassChat extends Notification{
 
         this.isConnected = false;
 
-
-        console.log(peer)
+        this.peer = peer 
+        console.log(this.peer)
 
         this.init()
     }
@@ -30,7 +30,7 @@ export default class ClassChat extends Notification{
 
         console.log("connect to ",this.param.peer_guestid)
         
-        this.conn = peer.connect(this.param.peer_guestid)
+        this.conn = this.peer.connect(`${this.param.peer_guestid}_video`)
 
         console.log(this.conn)
 
@@ -51,7 +51,7 @@ export default class ClassChat extends Notification{
 
 
 
-        peer.on('connection',conn=>{
+        this.peer.on('connection',conn=>{
 
 
 
@@ -63,7 +63,7 @@ export default class ClassChat extends Notification{
 
                 this.isConnected = true
 
-               this.conn =  peer.connect(this.param.peer_guestid)
+               this.conn =  this.peer.connect(`${this.param.peer_guestid}_video`)
 
                console.log(this.conn)
             }
@@ -73,7 +73,12 @@ export default class ClassChat extends Notification{
             conn.on('data',data=>{
 
                 console.log(data)
-                this.fire('msgreceive',data)
+
+    
+
+                    this.fire('msgreceive',data)
+   
+                
 
             })
 
@@ -84,10 +89,24 @@ export default class ClassChat extends Notification{
 
     }
 
+    sendCommand(command){
+
+        let data = {}
+        data.type = 'command'
+        data.content = command
+
+        this.conn.send(data)
+
+    }
+
 
     sendMsg(content){
 
-        this.conn.send(content)
+        let data = {}
+        data.type = 'text'
+        data.content = content
+
+        this.conn.send(data)
 
     }
 

@@ -20,7 +20,7 @@ export default class Controls extends Notification{
 
         $("#btn_sharedesktop").click(()=>{
 
-
+        
             this.fire("changeStrem",'')
         })
 
@@ -33,9 +33,12 @@ export default class Controls extends Notification{
 
             const gv = $("#guestvideo")
 
+            const av = $("#avatarvideo")
+
             console.log(gv.get(0).muted )
 
             gv.get(0).muted =  !gv.get(0).muted 
+            av.get(0).muted =  !av.get(0).muted 
 
             let title = 'Mute'
 

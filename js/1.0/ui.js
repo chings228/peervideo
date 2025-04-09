@@ -183,24 +183,12 @@ export default class UI{
 
     changeStream(){
 
-        console.log("change stream")
-        const btn = $("#btn_sharedesktop")
 
-    
-
-        if (this.streamtype == 'camera'){
-
-            this.streamtype = 'desktop'
-        }
-        else{
-            this.streamtype = 'camera'
-           
-        }
 
 
         //btn.html(title)
 
-        this.peerConnect.changeStream(this.streamtype)
+        this.peerConnect.changeStream()
 
 
     }

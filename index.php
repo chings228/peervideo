@@ -24,6 +24,8 @@
 <video id=hostvideo autoplay muted playsinline > </video>
 <video id=guestvideo autoplay   playsinline ></video>
 
+
+
 </div>
 
 
@@ -48,7 +50,7 @@
 
 <div class=buttons>
 
-    <button id=btn_sharedesktop> Desktop / Camera</button>
+    <button id=btn_sharedesktop> Share Desktop</button>
 
     <button id=btn_mute> Mute</button>
 

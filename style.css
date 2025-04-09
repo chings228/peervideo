@@ -28,6 +28,10 @@ video{
 
 }
 
+
+
+
+
 *{
     margin: 0px;
 }
@@ -143,7 +147,7 @@ button{
 
 .buttons *{
     margin : 3px;
-    padding : 2px;
+    padding : 2px 10px;
     height : 40px;
 }
 

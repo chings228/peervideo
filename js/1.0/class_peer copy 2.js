@@ -5,7 +5,6 @@ import {Peer} from "https://esm.sh/peerjs@1.5.4?bundle-deps"
 import Notification from "./notification.js"
 import ClassChat from "./class_chat.js"
 import ClassVideo from "./class_video.js"
-import createtPeer from "./createPeer.js"
 
 export default class PeerConnect extends Notification{
 
@@ -25,9 +24,6 @@ export default class PeerConnect extends Notification{
 
     peervideo
     peerchat
-
-
-    peers
 
 
 
@@ -83,7 +79,24 @@ export default class PeerConnect extends Notification{
     init(){
 
 
-           this.connect()
+        const turn = new turnserver()
+
+       turn.getTurn(e=>{
+
+             console.log("get turn server")
+
+
+            console.log(e)
+
+            if (e.isSuccess){
+
+                const turnserver = e.config
+
+
+                this.connect(turnserver)
+
+            }
+        })
 
     }
 
@@ -92,31 +105,46 @@ export default class PeerConnect extends Notification{
 
 
 
-    connect(){
+    connect(turnserver){
 
-            
-            const hostname = window.location.host.replaceAll(".",'')
+        console.log(`isHost ${global.isHost}`)
 
-            this.peer_hostid = `host_${hostname}_${this.hostid}`
-            this.peer_guestid = `guest_${hostname}_${this.hostid}`
-
-            if (!this.param.isHost){
-
-                const tempid = this.peer_hostid
-                this.peer_hostid = this.peer_guestid
-                this.peer_guestid = tempid
-            }
-
-            console.log(this.peer_hostid,this.peer_guestid)
-
-
+        const option = {};
+        option.host = 'video.1328.hk';
+        option.port = 3030;
+        option.path = '/';
+        option.config = turnserver
         
-            new createtPeer(this.peer_hostid,peers=>{
+        const hostname = window.location.host.replaceAll(".",'')
 
-                console.log("open",peers)
+        this.peer_hostid = `host_${hostname}_${this.hostid}`
+        this.peer_guestid = `guest_${hostname}_${this.hostid}`
 
-                this.peers = peers
-   
+        if (!this.param.isHost){
+
+             const tempid = this.peer_hostid
+             this.peer_hostid = this.peer_guestid
+             this.peer_guestid = tempid
+        }
+
+        console.log(this.peer_hostid,this.peer_guestid)
+
+        window.peer = new Peer(this.peer_hostid,option)
+
+
+        peer.on("error",e=>{
+            console.log(e.type)
+
+            this.response.errmsg = e.type
+
+            this.response.success = false
+            this.callback(this.response)
+        })
+        
+        peer.on("open",e=>{
+
+
+            console.log("peer open ",e)
 
             this.response.success = true
             
@@ -132,48 +160,16 @@ export default class PeerConnect extends Notification{
             param.guestvideoid  = this.param.guestvideoid
             param.hostvideoid = this.param.hostvideoid
 
-
-
-           this.peervideo = new ClassVideo(peers,param)
-
-
-           this.peervideo.on("command",e=>{
-
-                console.log(e)
-
-                this.peerchat.sendCommand(e)
-
-
-
-           })
+           this.peervideo = new ClassVideo(param)
           
 
 
-           this.peerchat = new ClassChat(peers.video,param)
+           this.peerchat = new ClassChat(param)
 
 
             this.peerchat.on("msgreceive",data=>{
 
-
-                
-                if (data.type == 'text'){
-
-                    this.fire('incomingtext',data.content)
-                }
-                else if (data.type == 'command'){
-
-                    // command
-
-                    if (data.content == 'stopsharing'){
-
-
-                        this.peervideo.stopGuestDesktopSharing()
-                    }
-
-
-                }
-
-                //this.fire('incomingtext',data)
+                this.fire('incomingtext',data)
             })
 
      
