@@ -309,11 +309,25 @@ export default class ClassVideo extends Notification{
             this.stopSharing()
         }
 
-        
+
+
+    }
+
+
+    changeMute(mute){
+
+        console.log("mute video",mute)
+
+        console.log(this.camerastream.getAudioTracks())
+
+        this.camerastream.getAudioTracks()[0].enabled = !mute
 
 
 
     }
+
+
+
 
 
     getStream(type) {

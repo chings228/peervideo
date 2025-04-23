@@ -46,6 +46,14 @@ export default class UI{
 
             this.control = new Controls()
 
+
+            this.control.on("mute",e=>{
+
+                console.log("mute",e)
+
+                this.peerConnect.changeMute(e)
+            })
+
             this.control.on("changeStrem",()=>{
 
                 this.changeStream()

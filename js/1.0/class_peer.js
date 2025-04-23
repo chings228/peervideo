@@ -205,6 +205,13 @@ export default class PeerConnect extends Notification{
     }
 
 
+    changeMute(mute){
+
+        this.peervideo.changeMute(mute)
+
+    }
+
+
 
 
 

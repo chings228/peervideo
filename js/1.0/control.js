@@ -6,10 +6,15 @@ import Notification from "./notification";
 export default class Controls extends Notification{
 
 
+    isMute
+
+
     constructor(){
 
         super()
         // init
+
+        this.isMute = false
 
         this.init()
     }
@@ -26,7 +31,7 @@ export default class Controls extends Notification{
 
 
 
-        $("#btn_mute").click(()=>{
+        $("#btn_shutup").click(()=>{
 
 
 
@@ -40,14 +45,40 @@ export default class Controls extends Notification{
             gv.get(0).muted =  !gv.get(0).muted 
             av.get(0).muted =  !av.get(0).muted 
 
-            let title = 'Mute'
+            let title = 'Shut Up'
 
             if (gv.get(0).muted){
-                title = 'UnMute'
+                title = 'Listen Again'
 
             }
 
+            $("#btn_shutup").html(title)
+
+        })
+
+
+
+        $("#btn_mute").click(()=>{
+
+            console.log("click mute")
+
+            let title = 'Mute'
+
+             this.isMute = !this.isMute
+
+            this.fire("mute",this.isMute)
+
+
+            if (this.isMute){
+                title = 'UnMute'
+            }
+
+
             $("#btn_mute").html(title)
+
+
+
+
 
         })
 
