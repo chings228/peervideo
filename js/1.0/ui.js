@@ -12,11 +12,11 @@ export default class UI{
 
     peerConnect
 
-    streamtype 
+
 
     constructor(param){
 
-        this.streamtype = 'camera'
+    
 
         this.param = param
 
