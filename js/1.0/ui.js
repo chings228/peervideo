@@ -1,6 +1,9 @@
 
 import PeerConnect from "https://cdn.jsdelivr.net/gh/chings228/peervideo@master/js/1.0/class_peer.js"
 
+
+// import PeerConnect from "./class_peer.js"
+
 import Controls from "./control"
 
 

@@ -1,5 +1,5 @@
 
-import turnserver from "./turnserver"
+import turnserver from "./turnserver.js"
 
 import {Peer} from "https://esm.sh/peerjs@1.5.4?bundle-deps"
 
