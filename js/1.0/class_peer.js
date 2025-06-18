@@ -1,6 +1,5 @@
 
-import turnserver from "./turnserver.js"
-import {Peer} from "https://esm.sh/peerjs@1.5.4?bundle-deps"
+
 
 import Notification from "./notification.js"
 import ClassChat from "./class_chat.js"
