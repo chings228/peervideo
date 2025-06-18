@@ -70,7 +70,9 @@ function init(){
 
     param.hostvideoid = 'hostvideo'
     param.guestvideoid = 'guestvideo'
+    param.avatarvideoid = 'avatarvideo'
     param.isHost = global.isHost 
+
     
 
 

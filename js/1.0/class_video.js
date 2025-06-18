@@ -28,60 +28,24 @@ export default class ClassVideo extends Notification{
 
 
 
-        this.addAvatarVideoDiv()
-
         this.init()
     }
 
-
-    addAvatarVideoDiv(){
-
-
-
-            const html = `
-            
-                <style>
-
-            
-#avatarvideo{
-
-    position:absolute;
-    z-index : 9999;
-    top: 20px;
-    right : 20px;
-    width : 40vw;
-    height : 30vw;
-    max-width : 300px;
-    max-height : 200px;
-    background-color: blue;
-    display:none;
-
-}
-            
-    </style>     
-    <video id=avatarvideo autoplay playsinline></video>    
-            `
-
-            $(".videodiv").append(html)
-    }
 
 
     init(){
 
 
 
+        console.log(this.param.avatarvideoid)
+
 
         this.hostvideo = $(`#${this.param.hostvideoid}`).get(0)
         this.guestvideo = $(`#${this.param.guestvideoid}`).get(0)
-        this.avatarvideo = $('#avatarvideo').get(0)
+        this.avatarvideo = $(`#${this.param.avatarvideoid}`).get(0)
 
         this.desktopmode = false;
 
-
-        // if (!global.isHost){
-
-        //     $("#avatarvideo").css("display","block")
-        // }
 
 
         this.setupCamera()

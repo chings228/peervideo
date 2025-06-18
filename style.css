@@ -160,4 +160,18 @@ button{
 
 
 
+#avatarvideo{
+
+    position:absolute;
+    z-index : 9999;
+    top: 20px;
+    right : 20px;
+    width : 40vw;
+    height : 30vw;
+    max-width : 300px;
+    max-height : 200px;
+    background-color: blue;
+    display:none;
+
+}
 

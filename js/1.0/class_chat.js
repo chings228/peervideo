@@ -57,6 +57,8 @@ export default class ClassChat extends Notification{
 
             console.log("peer connection")
 
+            this.fire("incomingvideo",'')
+
             if (!this.isConnected){
 
                 console.log("connect back")

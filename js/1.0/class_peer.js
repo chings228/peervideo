@@ -131,6 +131,7 @@ export default class PeerConnect extends Notification{
 
             param.guestvideoid  = this.param.guestvideoid
             param.hostvideoid = this.param.hostvideoid
+            param.avatarvideoid = this.param.avatarvideoid
 
 
 
@@ -154,6 +155,14 @@ export default class PeerConnect extends Notification{
 
 
            this.peerchat = new ClassChat(peers.video,param)
+
+
+           this.peerchat.on("incomingvideo",()=>{
+
+                console.log("incoming video")
+
+                this.fire("incomingvideo","")
+           })
 
 
             this.peerchat.on("msgreceive",data=>{

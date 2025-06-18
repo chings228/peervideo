@@ -24,7 +24,7 @@
 <video id=hostvideo autoplay muted playsinline > </video>
 <video id=guestvideo autoplay   playsinline ></video>
 
-
+<video id=avatarvideo autoplay playsinline></video>    
 
 </div>
 

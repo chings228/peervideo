@@ -1,5 +1,5 @@
 
-import PeerConnect from "./class_peer"
+import PeerConnect from "https://peerdev.1328.hk/js/1.0/class_peer.js"
 
 import Controls from "./control"
 
@@ -33,7 +33,7 @@ export default class UI{
 
 
 
-
+        console.log(this.param)
         
 
         this.peerConnect = new PeerConnect(this.param,e=>{
@@ -68,6 +68,12 @@ export default class UI{
 
             }
         
+        })
+
+        this.peerConnect.on("incomingvideo",()=>{
+
+            console.log("incoming video")
+
         })
 
 
