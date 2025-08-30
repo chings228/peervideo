@@ -13,7 +13,11 @@ export default class ClassVideo extends Notification{
     desktopstream
     peers
 
+    //sharebtn
+
     remoteCameraStream
+
+    sharedesktopbtn
 
     constructor(peers,param){
         super()
@@ -22,11 +26,18 @@ export default class ClassVideo extends Notification{
 
         this.param = param
 
+     
+
+        console.log("video class")
+
+
         console.log(param)
 
-        console.log("video")
 
+        if (param.isShareBtn){
+            this.sharedesktopbtn = document.getElementById(this.param.sharebtn)
 
+        }
 
         this.init()
     }
@@ -40,9 +51,11 @@ export default class ClassVideo extends Notification{
         console.log(this.param.avatarvideoid)
 
 
-        this.hostvideo = $(`#${this.param.hostvideoid}`).get(0)
-        this.guestvideo = $(`#${this.param.guestvideoid}`).get(0)
-        this.avatarvideo = $(`#${this.param.avatarvideoid}`).get(0)
+
+       this.hostvideo = document.getElementById(this.param.hostvideoid)
+       this.guestvideo = document.getElementById(this.param.guestvideoid)
+       this.avatarvideo = document.getElementById(this.param.avatarvideoid)
+
 
         this.desktopmode = false;
 
@@ -97,12 +110,16 @@ export default class ClassVideo extends Notification{
             call.on('stream',remotestream=>{
 
 
-                $("#btn_sharedesktop").css("display","none")
+   
+
+                this.sharedesktopbtn.style.display = 'none'
 
                 this.addVideoStream(this.guestvideo,remotestream)
 
 
-                $("#avatarvideo").css("display","block")
+                //$("#avatarvideo").css("display","block")
+
+                document.getElementById("avatarvideo").style.display = block;
 
                 this.addVideoStream(this.avatarvideo,this.remoteCameraStream)
             })
@@ -175,7 +192,7 @@ export default class ClassVideo extends Notification{
 
         // stream handle
 
- 
+
 
 
         if (!this.desktopmode){
@@ -191,7 +208,9 @@ export default class ClassVideo extends Notification{
 
 
                     this.desktopmode = true
-                    $("#btn_sharedesktop").text("Stop Sharing")
+                   // $("#btn_sharedesktop").text("Stop Sharing")
+
+                   this.sharedesktopbtn.textContent = 'Stop Sharing'
 
                     this.call.on('stream',remotestream=>{
 
@@ -220,7 +239,7 @@ export default class ClassVideo extends Notification{
         this.desktopmode = false
         this.desktopstream.getTracks().forEach(track => track.stop())
 
-        $("#btn_sharedesktop").html("Share Desktop");
+        this.sharedesktopbtn.innerHTML = "Share Desktop";
 
 
         this.fire("command","stopsharing")
@@ -252,11 +271,13 @@ export default class ClassVideo extends Notification{
 
         console.log("stop guest sharing ui")
 
-        $("#avatarvideo").css("display","none")
+
+
+        this.avatarvideo.style.display = "none"
 
         this.addVideoStream(this.guestvideo,this.remoteCameraStream)
 
-        $("#btn_sharedesktop").css("display","block")
+        this.sharedesktopbtn.style.display = 'block'
 
 
 

@@ -1,5 +1,10 @@
 
-import PeerConnect from "https://cdn.jsdelivr.net/gh/chings228/peervideo@master/js/1.0/class_peer.js"
+// import PeerConnect from "https://cdn.jsdelivr.net/gh/chings228/peervideo@master/js/1.0/class_peer.js"
+
+
+// import PeerConnect from "https://peer.1328.hk/js/1.0/class_peer.js"
+
+import PeerConnect from "https://peerdev.1328.hk/js/1.0/class_peer.js"
 
 
 // import PeerConnect from "./class_peer.js"
@@ -30,8 +35,6 @@ export default class UI{
     }
 
 
-
-
     init(){
 
 
@@ -47,7 +50,7 @@ export default class UI{
                 return
             }
 
-            this.control = new Controls()
+            this.control = new Controls(this.param)
 
 
             this.control.on("mute",e=>{

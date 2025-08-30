@@ -72,6 +72,14 @@ function init(){
     param.guestvideoid = 'guestvideo'
     param.avatarvideoid = 'avatarvideo'
     param.isHost = global.isHost 
+    // param.peerserverdomain = "video.1328.hk"
+    // param.peerserverport = 3030
+
+    param.sharebtn = 'btn_share'
+
+    param.mutebtn = 'btn_mute'
+    param.silentbtn = 'btn_silent'
+
 
     
 

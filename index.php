@@ -53,7 +53,7 @@
 
     <button id=btn_sharedesktop> Share Desktop</button>
 
-    <button id=btn_shutup>Shut Up</button>
+    <button id=btn_silent> Silent </button>
 
     <button id=btn_mute> Mute</button>
 

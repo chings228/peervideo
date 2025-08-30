@@ -1,6 +1,5 @@
 
 
-
 import Notification from "./notification.js"
 import ClassChat from "./class_chat.js"
 import ClassVideo from "./class_video.js"
@@ -32,14 +31,19 @@ export default class PeerConnect extends Notification{
 
     constructor(param,callback){
 
+ 
+
         super()
+
+
+        console.log("init www sdfsdfsddfdsffdfdsf")
 
         this.param = param
         this.callback = callback
 
         
 
-   
+        
 
 
     
@@ -110,61 +114,81 @@ export default class PeerConnect extends Notification{
 
 
         
-            new createtPeer(this.peer_hostid,peers=>{
+            new createtPeer(this.peer_hostid,this.param,peers=>{
 
                 console.log("open",peers)
 
                 this.peers = peers
    
 
-            this.response.success = true
-            
+                this.response.success = true
+                
 
-            this.callback(this.response)
-     
+                this.callback(this.response)
+        
 
- 
-            const param = {}
-            param.peer_guestid = this.peer_guestid
-            param.peer_hostid = this.peer_hostid
+    
+                const param = {}
+                param.peer_guestid = this.peer_guestid
+                param.peer_hostid = this.peer_hostid
 
-            param.guestvideoid  = this.param.guestvideoid
-            param.hostvideoid = this.param.hostvideoid
-            param.avatarvideoid = this.param.avatarvideoid
-
-
-
-           this.peervideo = new ClassVideo(peers,param)
+                param.guestvideoid  = this.param.guestvideoid
+                param.hostvideoid = this.param.hostvideoid
+                param.avatarvideoid = this.param.avatarvideoid
 
 
-           this.peervideo.on("command",e=>{
+                if (this.param.hasOwnProperty('sharebtn')){
 
-                console.log(e)
+                    param.isShareBtn = true
+                    param.sharebtn = this.param.sharebtn
+                }
 
-                const data = {}
-                data.type = 'command'
-                data.content = e
+                if (this.param.hasOwnProperty('mutebtn')){
 
-                this.peerchat.sendMsg(data)
+                    param.isMuteBtn = true
+                    param.mutebtn = this.param.mutebtn
+                }
 
+                
+                if (this.param.hasOwnProperty('silentbtn')){
 
-
-           })
-          
-
-
-           this.peerchat = new ClassChat(peers.video,param)
-
-
-           this.peerchat.on("incomingvideo",()=>{
-
-                console.log("incoming video")
-
-                this.fire("incomingvideo","")
-           })
+                    param.isSilentBtn = true
+                    param.silentbtn = this.param.silentbtn
+                }
+    
 
 
-            this.peerchat.on("msgreceive",data=>{
+                this.peervideo = new ClassVideo(peers,param)
+
+
+                this.peervideo.on("command",e=>{
+
+                        console.log(e)
+
+                        const data = {}
+                        data.type = 'command'
+                        data.content = e
+
+                        this.peerchat.sendMsg(data)
+
+
+
+                })
+                
+
+
+                this.peerchat = new ClassChat(peers.video,param)
+
+
+                this.peerchat.on("incomingvideo",()=>{
+
+                        console.log("incoming video")
+
+                        this.fire("incomingvideo","")
+                })
+
+
+                this.peerchat.on("msgreceive",data=>{
 
 
                 

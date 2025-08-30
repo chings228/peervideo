@@ -17,13 +17,16 @@ export default class createtPeer{
 
     name 
 
+    param
 
 
-    constructor(name,callback){
+    constructor(name,param,callback){
 
 
         this.callback = callback
         this.name = name
+
+        this.param = param
 
         const turn = new turnserver()
 
@@ -39,13 +42,7 @@ export default class createtPeer{
 
             }
 
-
-
-
         })
-
-
-
 
 
     }
@@ -57,8 +54,16 @@ export default class createtPeer{
         console.log(`isHost ${global.isHost}`)
 
         const option = {};
-        option.host = 'video.1328.hk';
-        option.port = 3030;
+
+
+        console.log(this.param)
+
+        if (this.param.hasOwnProperty('peerserverdomain')){
+            option.host = this.param.peerserverdomain;
+            option.port = this.param.peerserverport
+
+        }
+
         option.path = '/';
         option.config = this.turnserver
 
@@ -68,6 +73,11 @@ export default class createtPeer{
         console.log(pname)
 
         const peer  = new Peer(pname,option)
+
+
+
+
+
 
 
         this.peers[type] = peer

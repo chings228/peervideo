@@ -8,11 +8,14 @@ export default class Controls extends Notification{
 
     isMute
 
+    param
 
-    constructor(){
+    constructor(param){
 
         super()
         // init
+
+        this.param = param
 
         this.isMute = false
 
@@ -36,16 +39,16 @@ export default class Controls extends Notification{
 
 
 
-            const gv = $("#guestvideo")
+            const gv = $(`#${this.param.guestvideoid}`)
 
-            const av = $("#avatarvideo")
+            const av = $(`#${this.param.avatarvideoid}`)
 
             console.log(gv.get(0).muted )
 
             gv.get(0).muted =  !gv.get(0).muted 
             av.get(0).muted =  !av.get(0).muted 
 
-            let title = 'Shut Up'
+            let title = 'Slient'
 
             if (gv.get(0).muted){
                 title = 'Listen Again'
